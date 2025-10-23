@@ -290,7 +290,7 @@ const Header = () => {
       <div className="logo">
         <AppLink href="/index.html">
           <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1760896759/Blue_Bold_Office_Idea_Logo_250_x_80_px_7_uatyqd.png" alt="Taj Design Consult Logo" className="logo-image desktop-logo" />
-          <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1721596541/Blue_Bold_Office_Idea_Logo_80_x_80_px_x80h8r.png" alt="Taj Design Consult Logo" className="logo-image mobile-logo" />
+          <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1760896759/Blue_Bold_Office_Idea_Logo_250_x_80_px_7_uatyqd.png" alt="Taj Design Consult Logo" className="logo-image mobile-logo" />
         </AppLink>
       </div>
       <button 
