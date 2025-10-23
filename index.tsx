@@ -11,12 +11,13 @@ const servicesSubLinks = [
   { name: 'Engineering Consultancy', href: 'engineering-consultancy.html', icon: 'fas fa-cogs', description: 'Expert technical advice and solutions for robust project outcomes.', image: 'https://images.unsplash.com/photo-1518692113669-e34fa251a37c?w=800&auto=format&fit=crop&q=60' },
   { name: 'Project Management Consultancy', href: 'project-management.html', icon: 'fas fa-tasks', description: 'Overseeing projects from inception to completion on time and budget.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60' },
   { name: 'Sustainability & Energy', href: 'sustainability-energy.html', icon: 'fas fa-leaf', description: 'Integrating green principles for environmentally responsible designs.', image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format&fit=crop&q=60' },
+  { name: 'Construction Approval', href: 'construction-approval.html', icon: 'fas fa-check-double', description: 'Navigating regulatory hurdles to secure all necessary construction permits and approvals efficiently.', image: 'https://images.unsplash.com/photo-1563291074-2bf8677ac0e5?w=800&auto=format&fit=crop&q=60' },
 ];
 
 const navLinks = [
   { name: 'Home', href: '/index.html' },
   { name: 'About Us', href: '/about.html' },
-  { name: 'Works/Projects', href: '/works.html' },
+  { name: 'Works/Projects', href: '/index.html#works' },
   { name: 'Services', href: '/index.html#our-services', subLinks: servicesSubLinks },
   { name: 'Blog', href: '/index.html#blog' },
   { name: 'Careers', href: '/careers.html' },
@@ -117,6 +118,27 @@ const servicePageData = {
             'Environmental Impact Assessments (EIA/ESIA)',
             'Contractor Sustainability Compliance',
             'Training & Change Management',
+        ],
+    },
+    'construction-approval.html': {
+        title: 'Construction Approval',
+        image: 'https://images.unsplash.com/photo-1563291074-2bf8677ac0e5?w=800&auto=format&fit=crop&q=60',
+        alt: 'Official documents and a hard hat on a blueprint.',
+        content: [
+            'Navigating Qatar’s complex regulatory landscape is one of the most critical challenges in any construction project. Our dedicated Construction Approval team specializes in streamlining this process, acting as your expert liaison with all government authorities. We manage the entire lifecycle of approvals, from initial compliance checks to securing the final Building Completion Certificate (BCC). Our deep understanding of the requirements set by Baladiya (Municipality), the Building Permit Complex (DC1/DC2), Kahramaa, Ooredoo, Ashghal, and the Qatar Civil Defense Department (QCDD) ensures a smooth and predictable path to construction.',
+            'By entrusting us with your project approvals, you mitigate risks, avoid costly delays, and ensure full compliance with all local laws and building codes. Our established relationships with key authorities and our meticulous approach to documentation management allow us to anticipate hurdles and resolve issues proactively. We provide complete transparency throughout the process, giving you the peace of mind to focus on your core project objectives while we handle the critical administrative and regulatory groundwork.',
+        ],
+        services: [
+            'Initial Project Assessment & Regulatory Compliance Check',
+            'Building Permit (BP) Application Management (Baladiya)',
+            'DC1 & DC2 Submission, Tracking, and Follow-up',
+            'Utility Connections & NOCs (Kahramaa, Ooredoo)',
+            'Civil Defense (QCDD) Approval Coordination and Inspection Facilitation',
+            'Roads & Drainage NOCs (Ashghal)',
+            'Environmental Permits (Ministry of Environment and Climate Change)',
+            'Building Completion Certificate (BCC) Application and Acquisition',
+            'Regular Status Reporting and Authority Liaison',
+            'Comprehensive Management of All Required Documentation and Drawings',
         ],
     },
 };
@@ -335,14 +357,13 @@ const WhatsAppChatWidget = () => (
     </a>
 );
 
-// FIX: Update AppLink to use React.forwardRef to correctly handle refs passed from parent components. This resolves type errors with refs and improves component reusability.
-const AppLink = React.forwardRef<HTMLAnchorElement, {
+const AppLink = ({ href, className = '', children, onClick, ...props }: {
   href: string;
   className?: string;
   children: React.ReactNode;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   [key: string]: any;
-}>(({ href, className = '', children, onClick, ...props }, ref) => {
+}) => {
     const isToggle = href === '#';
 
     const handleClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
@@ -357,7 +378,6 @@ const AppLink = React.forwardRef<HTMLAnchorElement, {
 
     return (
         <a
-            ref={ref}
             href={href}
             className={className}
             onClick={onClick ? handleClick : undefined}
@@ -366,7 +386,7 @@ const AppLink = React.forwardRef<HTMLAnchorElement, {
             {children}
         </a>
     );
-});
+};
 
 const MobileNav = ({ isOpen, onClose }) => {
     const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -613,8 +633,7 @@ const Header = ({ theme }) => {
       >
         <i className="fas fa-bars" aria-hidden="true"></i>
       </button>
-      {/* FIX: Pass closeMobileNav to onClose to ensure focus is returned to the burger menu when the mobile navigation is closed. */}
-      <MobileNav isOpen={isMobileNavOpen} onClose={closeMobileNav} />
+      <MobileNav isOpen={isMobileNavOpen} onClose={() => setIsMobileNavOpen(false)} />
     </header>
   );
 };
@@ -827,7 +846,7 @@ const BlueprintAnimation = memo(() => {
 const HeroSection = () => {
     const [offsetY, setOffsetY] = useState(0);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-    const titleLines = ["WE DESIGN", "STRUCTURES"];
+    const titleLines = ["STRUCTURES WITH", "PURPOSE"];
     const fullTitle = titleLines.join(' ');
 
     useEffect(() => {
@@ -880,7 +899,7 @@ const HeroSection = () => {
                         </div>
                     ))}
                 </h1>
-                <a href="/works.html" className="explore-btn">Explore Our Work</a>
+                <a href="#works" className="explore-btn">Explore Our Work</a>
             </div>
              <a href="#about" className="scroll-down-indicator" aria-label="Scroll down to about section">
                 <i className="fas fa-arrow-down" aria-hidden="true"></i>
@@ -1120,9 +1139,24 @@ const HomePage = () => {
   useSmoothScroll();
   
   const workItems = [
-    { image: "https://images.adsttc.com/media/images/5de8/8330/3312/fd9f/fd00/01d3/large_jpg/08_Architect-Offices-Rivierstaete-Kantoren-Amsterdam-MVSA-%C2%A9Barwerd_van_der_Plas_W.jpg?1575519018", meta: "Architectural Design & Layout Planning", title: "Jazeera Business Center", description: "Office floors - Glass partitions - Reception & meeting suites" },
-    { image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&auto=format&fit=crop&q=60", meta: "Architectural Design", title: "Lusail Mixed-Use", description: "Retail podium - Serviced offices - Public realm upgrades" },
-    { image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&auto=format&fit=crop&q=60", meta: "Space & Layout Planning", title: "Residential Villas", description: "Efficient plans - Daylighting - Contemporary finishes" }
+    { 
+      image: "https://res.cloudinary.com/dj3vhocuf/image/upload/v1761148974/Screenshot_2025-10-22_212932_uarlk8.png", 
+      meta: "Design and Build of Office Interior", 
+      title: "TrustLink Office", 
+      description: "End-to-end office interior design and on-site supervision, ensuring QCDD/NFPA and Baladiya compliance for a smooth, approval-ready fit-out." 
+    },
+    { 
+      image: "https://res.cloudinary.com/dj3vhocuf/image/upload/v1761148974/Screenshot_2025-10-22_212957_yzlxxb.png", 
+      meta: "Design and Supervision of Office Interior", 
+      title: "World Wide Business Center", 
+      description: "A 2,000 sqm office blending elegant aesthetics with high functionality, featuring collaborative zones, meeting rooms, and a dedicated games area." 
+    },
+    { 
+      image: "https://res.cloudinary.com/dj3vhocuf/image/upload/v1761148974/Screenshot_2025-10-22_213038_l4jyns.png", 
+      meta: "Design and Municipality Approvals", 
+      title: "Al Jabor Building", 
+      description: "Full interior reconfiguration of a commercial building, expediting the permitting path with QCDD and Baladiya approvals for a faster time-to-market." 
+    }
   ];
 
   const testimonials = [
@@ -1141,10 +1175,11 @@ const HomePage = () => {
   ];
   
   const services = [
-    { icon: 'fas fa-archway', title: 'Architectural Design', description: 'Creating innovative and functional spaces from concept to construction, ensuring aesthetic appeal and structural integrity.', href: '/services/architectural-design' },
-    { icon: 'fas fa-cogs', title: 'Engineering Consultancy', description: 'Providing expert technical advice and solutions across various engineering disciplines for robust and efficient project outcomes.', href: '/services/engineering-consultancy' },
-    { icon: 'fas fa-tasks', title: 'Project Management Consultancy', description: 'Overseeing projects from inception to completion, ensuring they are delivered on time, within budget, and to the highest quality standards.', href: '/services/project-management' },
-    { icon: 'fas fa-leaf', title: 'Sustainability & Energy', description: 'Integrating green building principles and energy-efficient solutions to create environmentally responsible and cost-effective designs.', href: '/services/sustainability-energy' },
+    { icon: 'fas fa-archway', title: 'Architectural Design', description: 'Creating innovative and functional spaces from concept to construction, ensuring aesthetic appeal and structural integrity.', href: 'architectural-design.html' },
+    { icon: 'fas fa-cogs', title: 'Engineering Consultancy', description: 'Providing expert technical advice and solutions across various engineering disciplines for robust and efficient project outcomes.', href: 'engineering-consultancy.html' },
+    { icon: 'fas fa-tasks', title: 'Project Management Consultancy', description: 'Overseeing projects from inception to completion, ensuring they are delivered on time, within budget, and to the highest quality standards.', href: 'project-management.html' },
+    { icon: 'fas fa-leaf', title: 'Sustainability & Energy', description: 'Integrating green building principles and energy-efficient solutions to create environmentally responsible and cost-effective designs.', href: 'sustainability-energy.html' },
+    { icon: 'fas fa-check-double', title: 'Construction Approval', description: 'Navigating regulatory hurdles to secure all necessary construction permits and approvals efficiently.', href: 'construction-approval.html' },
   ];
 
   const sectors = [
