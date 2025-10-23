@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -10,26 +9,26 @@ const servicesSubLinks = [
   { name: 'Engineering Consultancy', href: 'engineering-consultancy.html', icon: 'fas fa-cogs', description: 'Expert technical advice and solutions for robust project outcomes.', image: 'https://images.unsplash.com/photo-1518692113669-e34fa251a37c?w=800&auto=format&fit=crop&q=60' },
   { name: 'Project Management Consultancy', href: 'project-management.html', icon: 'fas fa-tasks', description: 'Overseeing projects from inception to completion on time and budget.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60' },
   { name: 'Sustainability & Energy', href: 'sustainability-energy.html', icon: 'fas fa-leaf', description: 'Integrating green principles for environmentally responsible designs.', image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format&fit=crop&q=60' },
+  { name: 'Construction Approval', href: 'construction-approval.html', icon: 'fas fa-check-double', description: 'Navigating regulatory hurdles to secure all necessary construction permits and approvals efficiently.', image: 'https://images.unsplash.com/photo-1563291074-2bf8677ac0e5?w=800&auto=format&fit=crop&q=60' },
 ];
 
 const navLinks = [
   { name: 'Home', href: '/index.html' },
   { name: 'About Us', href: '/about.html' },
-  { name: 'Works/Projects', href: '/works.html' },
+  { name: 'Works/Projects', href: '/index.html#works' },
   { name: 'Services', href: '/index.html#our-services', subLinks: servicesSubLinks },
   { name: 'Blog', href: '/index.html#blog' },
   { name: 'Careers', href: '/careers.html' },
   { name: 'Contact', href: '/contact.html' },
 ];
 
-// FIX: Update AppLink to use React.forwardRef to correctly handle refs passed from parent components. This resolves type errors with refs and improves component reusability.
-const AppLink = React.forwardRef<HTMLAnchorElement, {
+const AppLink = ({ href, className = '', children, onClick, ...props }: {
   href: string;
   className?: string;
   children: React.ReactNode;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   [key: string]: any;
-}>(({ href, className = '', children, onClick, ...props }, ref) => {
+}) => {
     const isToggle = href === '#';
 
     const handleClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
@@ -44,7 +43,6 @@ const AppLink = React.forwardRef<HTMLAnchorElement, {
 
     return (
         <a 
-            ref={ref}
             href={href} 
             className={className} 
             onClick={onClick ? handleClick : undefined} 
@@ -53,7 +51,7 @@ const AppLink = React.forwardRef<HTMLAnchorElement, {
             {children}
         </a>
     );
-});
+};
 
 const MobileNav = ({ isOpen, onClose }) => {
     const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -383,7 +381,6 @@ const WaveAnimation = memo(() => {
     return <canvas ref={canvasRef} id="footer-wave-canvas" aria-hidden="true" />;
 });
 
-// FIX: The CustomCursor component was incomplete and did not return a JSX element, causing a type error with React.memo. It has been completed to render the cursor elements and now returns a valid component.
 const CustomCursor = memo(() => {
     const dotRef = useRef<HTMLDivElement>(null);
     const outlineRef = useRef<HTMLDivElement>(null);
@@ -401,7 +398,6 @@ const CustomCursor = memo(() => {
         const dotX = gsap.quickTo(dot, "x", { duration: 0.1, ease: "power3" });
         const dotY = gsap.quickTo(dot, "y", { duration: 0.1, ease: "power3" });
         const outlineX = gsap.quickTo(outline, "x", { duration: 0.3, ease: "power3" });
-        // FIX: The parameters for this GSAP animation were incomplete, causing a syntax error. The object has been properly closed.
         const outlineY = gsap.quickTo(outline, "y", { duration: 0.3, ease: "power3" });
 
         const mouseMove = (e: MouseEvent) => {
@@ -435,7 +431,7 @@ const CustomCursor = memo(() => {
         document.body.addEventListener("mouseenter", showCursor);
 
         const hoverTargets = document.querySelectorAll(
-            'a, button, [role="button"], .whatsapp-widget, .carousel-dot, .carousel-nav-btn, .project-card'
+            'a, button, [role="button"], .whatsapp-widget, .project-card'
         );
         hoverTargets.forEach(target => {
             target.addEventListener('mouseenter', handleMouseEnterHoverTarget);
@@ -533,7 +529,7 @@ const ServicePage = () => {
         elementsToReveal.forEach((el) => observer.unobserve(el));
     }
   }, []);
-  
+
   const services = [
     'Structural Engineering – Design of robust and efficient structural systems for buildings and infrastructure.',
     'MEP (Mechanical, Electrical & Plumbing) Engineering – Integrated design of building services for optimal performance and comfort.',
@@ -548,9 +544,9 @@ const ServicePage = () => {
   ];
 
   const relatedProjects = [
-    { image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60", title: "Suspension Bridge Analysis", category: "Structural Engineering" },
-    { image: "https://images.unsplash.com/photo-1518692113669-e34fa251a37c?w=800&auto=format&fit=crop&q=60", title: "Smart Tower MEP Systems", category: "MEP Engineering" },
-    { image: "https://images.unsplash.com/photo-1605143934594-99815e353273?w=800&auto=format&fit=crop&q=60", title: "City Metro Geotechnical Survey", category: "Geotechnical Engineering" },
+    { image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60", title: "Skybridge Tower", category: "Structural Engineering" },
+    { image: "https://images.unsplash.com/photo-1518692113669-e34fa251a37c?w=800&auto=format&fit=crop&q=60", title: "Metropolitan Hospital", category: "MEP Engineering" },
+    { image: "https://i.pinimg.com/736x/0b/8c/86/0b8c8615aa86527ab87496b87d4d5d07.jpg", title: "Cityline Metro Expansion", category: "Civil & Infrastructure" },
   ];
 
   return (
@@ -562,7 +558,7 @@ const ServicePage = () => {
       <div className="main-container">
         <LeftSidebar />
         <main className="main-content" id="main-content" tabIndex={-1}>
-          <section className="service-hero-section scroll-trigger fade-up" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1581092446337-234557050003?w=1200&auto=format&fit=crop&q=60')` }}>
+          <section className="service-hero-section scroll-trigger fade-up" style={{ backgroundImage: `url('https://media.istockphoto.com/id/1944772735/photo/closeup-of-team-of-industrial-engineers-meeting-analyze-machinery-blueprints-consult-project.jpg?s=612x612&w=0&k=20&c=ztBo9tQc/wwkmcyoqFtJhh0u31K+Q6jYjeicsGJJ7bbEq8LwPWV/w0cnzOqR2m694/Af6hpFayLJZkG2VQ==')`}}>
             <div className="container">
               <h1 className="scroll-trigger fade-up" style={{transitionDelay: '0.1s'}}>Engineering <strong>Consultancy</strong></h1>
             </div>
@@ -580,7 +576,7 @@ const ServicePage = () => {
                   </p>
                 </div>
                 <div className="service-sidebar-image">
-                  <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?w=800&auto=format&fit=crop&q=60" alt="Engineers collaborating on a blueprint." />
+                  <img src="https://media.istockphoto.com/id/1387565694/photo/digital-technology-used-for-construction-work.jpg?s=612x612&w=0&k=20&c=4JaaPwyqAcjD-cq90Jbecyz1T5K2ZJgIRA5PWcqd_BU=" alt="Engineers collaborating on a blueprint." />
                 </div>
               </div>
 
