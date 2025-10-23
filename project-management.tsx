@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
@@ -7,28 +6,29 @@ declare const gsap: any;
 
 const servicesSubLinks = [
   { name: 'Architectural Design', href: 'architectural-design.html', icon: 'fas fa-archway', description: 'Innovative and functional spaces from concept to construction.', image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60' },
-  { name: 'Engineering Consultancy', href: 'engineering-consultancy.html', icon: 'fas fa-cogs', description: 'Expert technical advice and solutions for robust project outcomes.', image: 'https://images.unsplash.com/photo-1518692113669-e34fa251a37c?w=800&auto=format&fit=crop&q=60' },
+  { name: 'Engineering Consultancy', href: 'engineering-consultancy.html', icon: 'fas fa-cogs', description: 'Expert technical advice and solutions for robust project outcomes.', image: 'https://website-media.com/beacon-hospitality/beacon-hospitality-2024/2023/08/13174251/Structural-engineer-and-architect-working-with-blueprints.jpeg' },
   { name: 'Project Management Consultancy', href: 'project-management.html', icon: 'fas fa-tasks', description: 'Overseeing projects from inception to completion on time and budget.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60' },
   { name: 'Sustainability & Energy', href: 'sustainability-energy.html', icon: 'fas fa-leaf', description: 'Integrating green principles for environmentally responsible designs.', image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format&fit=crop&q=60' },
+  { name: 'Construction Approval', href: 'construction-approval.html', icon: 'fas fa-check-double', description: 'Navigating regulatory hurdles to secure all necessary construction permits and approvals efficiently.', image: 'https://images.unsplash.com/photo-1563291074-2bf8677ac0e5?w=800&auto=format&fit=crop&q=60' },
 ];
 
 const navLinks = [
   { name: 'Home', href: '/index.html' },
   { name: 'About Us', href: '/about.html' },
-  { name: 'Works/Projects', href: '/works.html' },
+  { name: 'Works/Projects', href: '/index.html#works' },
   { name: 'Services', href: '/index.html#our-services', subLinks: servicesSubLinks },
   { name: 'Blog', href: '/index.html#blog' },
   { name: 'Careers', href: '/careers.html' },
   { name: 'Contact', href: '/contact.html' },
 ];
 
-const AppLink = React.forwardRef<HTMLAnchorElement, {
+const AppLink = ({ href, className = '', children, onClick, ...props }: {
   href: string;
   className?: string;
   children: React.ReactNode;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   [key: string]: any;
-}>(({ href, className = '', children, onClick, ...props }, ref) => {
+}) => {
     const isToggle = href === '#';
 
     const handleClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
@@ -43,7 +43,6 @@ const AppLink = React.forwardRef<HTMLAnchorElement, {
 
     return (
         <a 
-            ref={ref}
             href={href} 
             className={className} 
             onClick={onClick ? handleClick : undefined} 
@@ -52,7 +51,7 @@ const AppLink = React.forwardRef<HTMLAnchorElement, {
             {children}
         </a>
     );
-});
+};
 
 const MobileNav = ({ isOpen, onClose }) => {
     const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -170,7 +169,6 @@ const Header = ({ theme }) => {
   };
 
   useEffect(() => {
-    // FIX: A typo 'is' was used instead of 'if', causing a syntax error.
     if (isServicesDropdownOpen) {
       const firstItem = servicesDropdownContainerRef.current?.querySelector<HTMLAnchorElement>('.dropdown-menu a');
       firstItem?.focus();
@@ -433,7 +431,7 @@ const CustomCursor = memo(() => {
         document.body.addEventListener("mouseenter", showCursor);
 
         const hoverTargets = document.querySelectorAll(
-            'a, button, [role="button"], .whatsapp-widget, .carousel-dot, .carousel-nav-btn, .project-card'
+            'a, button, [role="button"], .whatsapp-widget, .project-card'
         );
         hoverTargets.forEach(target => {
             target.addEventListener('mouseenter', handleMouseEnterHoverTarget);
@@ -545,9 +543,9 @@ const ServicePage = () => {
   ];
 
   const relatedProjects = [
-    { image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&auto=format&fit=crop&q=60", title: "Metropolis Tower Construction", category: "Construction Management" },
-    { image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60", title: "Coastal Resort Development", category: "Project Management" },
-    { image: "https://images.unsplash.com/photo-1519397902402-d8d15418a873?w=800&auto=format&fit=crop&q=60", title: "Infrastructure Upgrade Program", category: "Program Management" },
+    { image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&auto=format&fit=crop&q=60", title: "Metropolis Tower", category: "High-Rise Construction" },
+    { image: "https://media.istockphoto.com/id/154962832/photo/machine-blueprint-outline-design-paperwork-document.jpg?s=612x612&w=0&k=20&c=F9UR8XhvUC3kt-LZjjxpN8pcp_ZT6yKFQ9NFWvAAoFo=", title: "Coastal Resort Complex", category: "Hospitality Project Management" },
+    { image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&auto=format&fit=crop&q=60", title: "Civic Center Redevelopment", category: "Public Sector Projects" },
   ];
 
   return (
@@ -559,7 +557,7 @@ const ServicePage = () => {
       <div className="main-container">
         <LeftSidebar />
         <main className="main-content" id="main-content" tabIndex={-1}>
-          <section className="service-hero-section scroll-trigger fade-up" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&auto=format&fit=crop&q=60')` }}>
+          <section className="service-hero-section scroll-trigger fade-up" style={{ backgroundImage: `url('https://4castplus.com/wp-content/uploads/2021/08/Construction-workers-observe-crane-in-early-morning-optimized.jpeg')`}}>
             <div className="container">
               <h1 className="scroll-trigger fade-up" style={{transitionDelay: '0.1s'}}>Project & Construction <strong>Management</strong></h1>
             </div>
@@ -570,10 +568,10 @@ const ServicePage = () => {
               <div className="service-content-grid scroll-trigger fade-up" style={{transitionDelay: '0.2s'}}>
                 <div className="service-main-content">
                   <p>
-                    We provide comprehensive leadership for projects of all sizes, ensuring your vision is realized on time, on budget, and to the highest quality standards. Our Project Management Consultancy (PMC) team serves as a trusted extension of our clients, managing every phase of a project from inception to handover. With a proven track record on some of Qatar’s most iconic developments, we specialize in navigating complex projects with precision and foresight. Our deep local experience gives us an unparalleled understanding of regional regulations and market dynamics, allowing us to proactively mitigate risks and drive project success.
+                  We provide comprehensive leadership for projects of all sizes, ensuring your vision is realized on time, on budget, and to the highest quality standards. Our Project Management Consultancy (PMC) team serves as a trusted extension of our clients, managing every phase of a project from inception to handover. With a proven track record on some of Qatar’s most iconic developments, we specialize in navigating complex projects with precision and foresight. Our deep local experience gives us an unparalleled understanding of regional regulations and market dynamics, allowing us to proactively mitigate risks and drive project success.
                   </p>
                   <p>
-                    Our methodology is built on a foundation of clear communication, rigorous control, and proactive problem-solving. We implement robust systems for planning, cost management, and quality assurance, ensuring complete transparency for all stakeholders. By integrating seamlessly with design teams, contractors, and authorities, we foster a collaborative environment focused on shared goals. Whether managing a single project or a large-scale program, our commitment is to safeguard our clients' interests and deliver outcomes that exceed expectations.
+                  Our methodology is built on a foundation of clear communication, rigorous control, and proactive problem-solving. We implement robust systems for planning, cost management, and quality assurance, ensuring complete transparency for all stakeholders. By integrating seamlessly with design teams, contractors, and authorities, we foster a collaborative environment focused on shared goals. Whether managing a single project or a large-scale program, our commitment is to safeguard our clients' interests and deliver outcomes that exceed expectations.
                   </p>
                 </div>
                 <div className="service-sidebar-image">
