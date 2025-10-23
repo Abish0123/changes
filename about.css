@@ -1,4 +1,5 @@
 
+
 :root {
   --dark-bg: #111111;
   --dark-bg-secondary: #1c1c1c;
@@ -196,12 +197,11 @@ html, body {
     height: 60px; 
     width: auto;
 }
-
 .desktop-logo {
-    display: block;
+  display: block;
 }
 .mobile-logo {
-    display: none;
+  display: none;
 }
 
 .app-header.on-dark .main-nav a { color: var(--text-light); }
