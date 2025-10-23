@@ -375,7 +375,7 @@ const Header = ({ theme }) => {
                                   onClick={() => setIsServicesDropdownOpen(false)}
                                   style={{ '--delay': `${index * 0.05}s` } as React.CSSProperties}
                               >
-                                  <i className={`fas fa-archway dropdown-link-icon`} aria-hidden="true"></i>
+                                  <i className={`${subLink.icon} dropdown-link-icon`} aria-hidden="true"></i>
                                   <span>{subLink.name}</span>
                               </AppLink>
                           </li>
