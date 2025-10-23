@@ -1,6 +1,5 @@
 
 
-
 :root {
   --dark-bg: #111111;
   --dark-bg-secondary: #1c1c1c;
@@ -168,19 +167,6 @@ html, body {
 
 .main-content:focus {
     outline: none;
-}
-
-.logo-image {
-    height: 60px;
-    width: auto;
-}
-
-.desktop-logo {
-  display: block;
-}
-
-.mobile-logo {
-  display: none;
 }
 
 .app-header {
@@ -873,30 +859,6 @@ html, body {
     .service-sidebar-image { display: none; }
     .service-list { column-count: 1; }
     .project-grid { grid-template-columns: repeat(2, 1fr); }
-
-    .desktop-logo {
-        display: none;
-    }
-    .mobile-logo {
-        display: block;
-        height: 50px;
-    }
-    .app-header {
-        display: grid;
-        grid-template-columns: 50px 1fr 50px;
-        align-items: center;
-        padding: 10px 20px;
-    }
-    .logo {
-        grid-column: 2;
-        justify-self: center;
-        order: initial;
-    }
-    .burger-menu {
-        grid-column: 3;
-        justify-self: end;
-        order: initial;
-    }
 }
 @media (max-width: 768px) {
     .content-section { padding: 80px 20px; }
