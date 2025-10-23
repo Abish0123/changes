@@ -1,3 +1,4 @@
+
 :root {
     --dark-bg: #111111;
     --dark-bg-secondary: #1c1c1c;
@@ -198,44 +199,19 @@
       order: 1;
   }
 
-  .logo .logo-link {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      gap: 15px;
-  }
-
   .logo-image {
-      height: 80px; 
+      height: 60px; 
       width: auto;
   }
-
-  .logo-taj {
-      font-size: 48px;
-      font-weight: 200;
-      line-height: 1;
-  }
-  .logo-right {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      transform: translateY(6px);
-  }
-  .logo-line {
-      width: 80px;
-      height: 1.5px;
-      background-color: var(--accent-color);
-  }
-  .logo-consultancy {
-      font-size: 16px;
-      letter-spacing: 1.5px;
-      color: var(--accent-color);
-      font-weight: 400;
-  }
-  .app-header.on-dark .logo-taj { color: var(--text-light); }
-  .app-header.on-light .logo-taj { color: var(--text-dark); }
-  .app-header:not([class*="on-"]) .logo-taj { color: var(--text-dark); }
   
+  .desktop-logo {
+    display: block;
+  }
+
+  .mobile-logo {
+    display: none;
+  }
+
   .main-nav {
       order: 2;
   }
@@ -2188,7 +2164,9 @@
       .burger-menu { display: block; }
       .custom-cursor-dot, .custom-cursor-outline { display: none; }
       .app, .app a, .app button, .app [role="button"], .app input { cursor: auto !important; }
-
+      .desktop-logo { display: none; }
+      .mobile-logo { display: block; }
+      .logo-image { height: 60px; }
       .about-section .grid {
           grid-template-columns: 1fr;
           gap: 40px;
@@ -2305,6 +2283,7 @@
       .works-list {
           gap: 60px;
       }
+      .logo-image.mobile-logo { height: 50px; }
   }
 
   @media (max-width: 576px) {
