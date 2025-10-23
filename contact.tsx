@@ -1,35 +1,34 @@
 
-
 import React, { useState, useEffect, useRef, memo, MouseEventHandler } from 'react';
 import { createRoot } from 'react-dom/client';
 
 declare const gsap: any;
 
 const servicesSubLinks = [
-  { name: 'Architectural Design', href: 'architectural-design.html', icon: 'fas fa-archway' },
-  { name: 'Engineering Consultancy', href: 'engineering-consultancy.html', icon: 'fas fa-cogs' },
-  { name: 'Project Management Consultancy', href: 'project-management.html', icon: 'fas fa-tasks' },
-  { name: 'Sustainability & Energy', href: 'sustainability-energy.html', icon: 'fas fa-leaf' },
+  { name: 'Architectural Design', href: 'architectural-design.html', icon: 'fas fa-archway', description: 'Innovative and functional spaces from concept to construction.', image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=60' },
+  { name: 'Engineering Consultancy', href: 'engineering-consultancy.html', icon: 'fas fa-cogs', description: 'Expert technical advice and solutions for robust project outcomes.', image: 'https://images.unsplash.com/photo-1518692113669-e34fa251a37c?w=800&auto=format&fit=crop&q=60' },
+  { name: 'Project Management Consultancy', href: 'project-management.html', icon: 'fas fa-tasks', description: 'Overseeing projects from inception to completion on time and budget.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60' },
+  { name: 'Sustainability & Energy', href: 'sustainability-energy.html', icon: 'fas fa-leaf', description: 'Integrating green principles for environmentally responsible designs.', image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format&fit=crop&q=60' },
+  { name: 'Construction Approval', href: 'construction-approval.html', icon: 'fas fa-check-double', description: 'Navigating regulatory hurdles to secure all necessary construction permits and approvals efficiently.', image: 'https://images.unsplash.com/photo-1563291074-2bf8677ac0e5?w=800&auto=format&fit=crop&q=60' },
 ];
 
 const navLinks = [
   { name: 'Home', href: '/index.html' },
   { name: 'About Us', href: '/about.html' },
-  { name: 'Works/Projects', href: '/works.html' },
+  { name: 'Works/Projects', href: '/index.html#works' },
   { name: 'Services', href: '/index.html#our-services', subLinks: servicesSubLinks },
   { name: 'Blog', href: '/index.html#blog' },
   { name: 'Careers', href: '/careers.html' },
   { name: 'Contact', href: '/contact.html' },
 ];
 
-// FIX: Update AppLink to use React.forwardRef to correctly handle refs passed from parent components. This resolves type errors with refs and improves component reusability.
-const AppLink = React.forwardRef<HTMLAnchorElement, {
+const AppLink = ({ href, className = '', children, onClick, ...props }: {
   href: string;
   className?: string;
   children: React.ReactNode;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   [key: string]: any;
-}>(({ href, className = '', children, onClick, ...props }, ref) => {
+}) => {
     const isToggle = href === '#';
 
     const handleClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
@@ -44,7 +43,6 @@ const AppLink = React.forwardRef<HTMLAnchorElement, {
 
     return (
         <a 
-            ref={ref}
             href={href} 
             className={className} 
             onClick={onClick ? handleClick : undefined} 
@@ -53,7 +51,7 @@ const AppLink = React.forwardRef<HTMLAnchorElement, {
             {children}
         </a>
     );
-});
+};
 
 // FIX: Updated MobileNav to be consistent with the more accessible version in other files.
 const MobileNav = ({ isOpen, onClose }) => {
@@ -159,12 +157,6 @@ const Header = () => {
   const burgerMenuRef = useRef<HTMLButtonElement>(null);
   const servicesToggleRef = useRef<HTMLAnchorElement>(null);
   const servicesDropdownContainerRef = useRef<HTMLLIElement>(null);
-
-  // FIX: Added closeMobileNav to handle focus management when closing the mobile menu.
-  const closeMobileNav = () => {
-    setIsMobileNavOpen(false);
-    burgerMenuRef.current?.focus();
-  };
 
   const closeServicesDropdown = (shouldFocusToggle = true) => {
     if (isServicesDropdownOpen) {
@@ -289,8 +281,7 @@ const Header = () => {
       </nav>
       <div className="logo">
         <AppLink href="/index.html">
-          <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1760896759/Blue_Bold_Office_Idea_Logo_250_x_80_px_7_uatyqd.png" alt="Taj Design Consult Logo" className="logo-image desktop-logo" />
-          <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1760896759/Blue_Bold_Office_Idea_Logo_250_x_80_px_7_uatyqd.png" alt="Taj Design Consult Logo" className="logo-image mobile-logo" />
+          <img src="https://res.cloudinary.com/dj3vhocuf/image/upload/v1760896759/Blue_Bold_Office_Idea_Logo_250_x_80_px_7_uatyqd.png" alt="Taj Design Consult Logo" className="logo-image" />
         </AppLink>
       </div>
       <button 
@@ -303,7 +294,7 @@ const Header = () => {
       >
         <i className="fas fa-bars" aria-hidden="true"></i>
       </button>
-      <MobileNav isOpen={isMobileNavOpen} onClose={closeMobileNav} />
+      <MobileNav isOpen={isMobileNavOpen} onClose={() => setIsMobileNavOpen(false)} />
     </header>
   );
 };
