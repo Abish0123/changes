@@ -9,12 +9,13 @@ const servicesSubLinks = [
   { name: 'Engineering Consultancy', href: 'engineering-consultancy.html', icon: 'fas fa-cogs', description: 'Expert technical advice and solutions for robust project outcomes.', image: 'https://images.unsplash.com/photo-1518692113669-e34fa251a37c?w=800&auto=format&fit=crop&q=60' },
   { name: 'Project Management Consultancy', href: 'project-management.html', icon: 'fas fa-tasks', description: 'Overseeing projects from inception to completion on time and budget.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60' },
   { name: 'Sustainability & Energy', href: 'sustainability-energy.html', icon: 'fas fa-leaf', description: 'Integrating green principles for environmentally responsible designs.', image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format&fit=crop&q=60' },
+  { name: 'Construction Approval', href: 'construction-approval.html', icon: 'fas fa-check-double', description: 'Navigating regulatory hurdles to secure all necessary construction permits and approvals efficiently.', image: 'https://images.unsplash.com/photo-1563291074-2bf8677ac0e5?w=800&auto=format&fit=crop&q=60' },
 ];
 
 const navLinks = [
   { name: 'Home', href: '/index.html' },
   { name: 'About Us', href: '/about.html' },
-  { name: 'Works/Projects', href: '/works.html' },
+  { name: 'Works/Projects', href: '/index.html#works' },
   { name: 'Services', href: '/index.html#our-services', subLinks: servicesSubLinks },
   { name: 'Blog', href: '/index.html#blog' },
   { name: 'Careers', href: '/careers.html' },
@@ -36,14 +37,13 @@ const careerOpenings = [
     },
 ];
 
-// FIX: Update AppLink to use React.forwardRef to correctly handle refs passed from parent components. This resolves type errors with refs and improves component reusability.
-const AppLink = React.forwardRef<HTMLAnchorElement, {
+const AppLink = ({ href, className = '', children, onClick, ...props }: {
   href: string;
   className?: string;
   children: React.ReactNode;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
   [key: string]: any;
-}>(({ href, className = '', children, onClick, ...props }, ref) => {
+}) => {
     const isToggle = href === '#';
 
     const handleClick: MouseEventHandler<HTMLAnchorElement> = (e) => {
@@ -58,7 +58,6 @@ const AppLink = React.forwardRef<HTMLAnchorElement, {
 
     return (
         <a 
-            ref={ref}
             href={href} 
             className={className} 
             onClick={onClick ? handleClick : undefined} 
@@ -67,7 +66,7 @@ const AppLink = React.forwardRef<HTMLAnchorElement, {
             {children}
         </a>
     );
-});
+};
 
 const MobileNav = ({ isOpen, onClose }) => {
     const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -324,26 +323,25 @@ const Header = () => {
 };
 
 const LeftSidebar = () => {
-  return (
-    <aside className="left-sidebar">
-      <div className="sidebar-top">
-        <div className="divider" />
-        <div className="home-text">CAREERS</div>
-      </div>
-      <div className="social-icons">
-        <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f" aria-hidden="true"></i></a>
-        <a href="#" aria-label="Twitter"><i className="fab fa-twitter" aria-hidden="true"></i></a>
-        <a href="#" aria-label="Instagram"><i className="fab fa-instagram" aria-hidden="true"></i></a>
-        <a href="#" aria-label="LinkedIn"><i className="fab fa-linkedin-in" aria-hidden="true"></i></a>
-      </div>
-      <div className="sidebar-footer">
-        <p>© Taj Design Consult 2024. All rights reserved.</p>
-      </div>
-    </aside>
-  );
+    return (
+      <aside className="left-sidebar">
+        <div className="sidebar-top">
+          <div className="divider" />
+          <div className="home-text">CAREERS</div>
+        </div>
+        <div className="social-icons">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fab fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i className="fab fa-twitter" aria-hidden="true"></i></a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="fab fa-instagram" aria-hidden="true"></i></a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        </div>
+        <div className="sidebar-footer">
+          <p>© Taj Design Consult 2024. All rights reserved.</p>
+        </div>
+      </aside>
+    );
 };
-
-// FIX: The WaveAnimation component was incomplete and did not return a JSX element, causing a type error with React.memo. It has been completed to render a canvas and now returns a valid component.
+  
 const WaveAnimation = memo(() => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -399,7 +397,23 @@ const WaveAnimation = memo(() => {
 
     return <canvas ref={canvasRef} id="footer-wave-canvas" aria-hidden="true" />;
 });
+  
+const Footer = () => {
+    const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    return (
+        <footer id="footer" className="app-footer">
+            <WaveAnimation />
+            <div className="container">
+                <div className="copyright-section">
+                    <span>2024 © Taj Design Consult. All rights reserved.</span>
+                    <button className="to-top" onClick={scrollToTop} aria-label="Scroll back to top">To Top ↑</button>
+                </div>
+            </div>
+          </footer>
+    )
+}
+  
 const CustomCursor = memo(() => {
     const dotRef = useRef<HTMLDivElement>(null);
     const outlineRef = useRef<HTMLDivElement>(null);
@@ -450,7 +464,7 @@ const CustomCursor = memo(() => {
         document.body.addEventListener("mouseenter", showCursor);
 
         const hoverTargets = document.querySelectorAll(
-            'a, button, [role="button"], input, .job-item-header, .whatsapp-widget, select, textarea, label'
+            'a, button, [role="button"], input, .whatsapp-widget, select, textarea, label'
         );
         hoverTargets.forEach(target => {
             target.addEventListener('mouseenter', handleMouseEnterHoverTarget);
@@ -490,104 +504,95 @@ const WhatsAppChatWidget = () => (
     </a>
 );
 
-const Footer = () => {
-    const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    return (
-        <footer id="footer" className="app-footer">
-            <WaveAnimation />
-            <div className="container">
-                <div className="copyright-section">
-                    <span>2024 © Taj Design Consult. All rights reserved.</span>
-                    <button className="to-top" onClick={scrollToTop} aria-label="Scroll back to top">To Top ↑</button>
-                </div>
-            </div>
-          </footer>
-    )
-};
-
-const JobOpening = ({ title, description, index }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const contentRef = useRef<HTMLDivElement>(null);
-
-    const toggleOpen = () => setIsOpen(prev => !prev);
-
-    useEffect(() => {
-        if (contentRef.current) {
-            contentRef.current.style.maxHeight = isOpen ? `${contentRef.current.scrollHeight}px` : '0px';
-        }
-    }, [isOpen]);
-
-    return (
-        <div className="job-item scroll-trigger fade-up" style={{ transitionDelay: `${index * 0.1}s` }}>
-            <button
-                className="job-item-header"
-                onClick={toggleOpen}
-                aria-expanded={isOpen}
-                aria-controls={`job-content-${index}`}
-            >
-                <h3>{title}</h3>
-                <i className={`fas fa-chevron-down dropdown-indicator ${isOpen ? 'open' : ''}`} aria-hidden="true"></i>
-            </button>
-            <div
-                ref={contentRef}
-                id={`job-content-${index}`}
-                className="job-item-content"
-                aria-hidden={!isOpen}
-            >
-                <p>{description}</p>
-                <a href={`mailto:careers@tajdc.com?subject=Application for ${title}`} className="apply-btn">Apply Now</a>
-            </div>
-        </div>
-    );
-};
-
 const CareersPage = () => {
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) { document.querySelectorAll('.scroll-trigger').forEach(el => el.classList.add('visible')); return; }
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
-        });
-      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-    const elementsToReveal = document.querySelectorAll('.scroll-trigger');
-    elementsToReveal.forEach((el) => observer.observe(el));
-    return () => elementsToReveal.forEach((el) => observer.unobserve(el));
-  }, []);
-  
-  return (
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const successMessageRef = useRef<HTMLHeadingElement>(null);
+    const [fileName, setFileName] = useState('');
+
+    useEffect(() => { 
+        if (isSubmitted) { 
+            successMessageRef.current?.focus(); 
+            successMessageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }); 
+        }
+    }, [isSubmitted]);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setFileName(e.target.files[0].name);
+        } else {
+            setFileName('');
+        }
+    };
+    
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitted(true);
+    };
+
+    return (
     <>
       <section id="careers-hero" className="careers-hero-section scroll-trigger fade-up">
-          <h1>Join Our <strong>Team</strong></h1>
-          <p>We are always looking for passionate and talented individuals to join our multidisciplinary team. Explore our current openings and help us shape the future of design and engineering.</p>
+        <h1>Join Our <strong>Team</strong></h1>
+        <p>We are always looking for passionate and talented individuals to join our growing team. Explore our open positions and find your place at Taj Design Consult.</p>
       </section>
 
-      <section id="openings" className="content-section">
-          <div className="container">
-              <h2 className="section-title scroll-trigger fade-up" style={{textAlign: 'center', marginBottom: '60px'}}>Current <strong>Openings</strong></h2>
-              <div className="job-listings">
-                {careerOpenings.length > 0 ? (
-                    careerOpenings.map((job, index) => (
-                        <JobOpening key={index} title={job.title} description={job.description} index={index} />
-                    ))
-                ) : (
-                    <p style={{textAlign: 'center'}}>There are no open positions at this time. Please check back later.</p>
-                )}
-              </div>
-          </div>
-      </section>
-
-      <section className="content-section">
+      <section id="open-positions" className="content-section">
         <div className="container">
-            <div className="apply-info-box scroll-trigger fade-up">
-                <h3>Don't see a role that fits?</h3>
-                <p>We're always open to connecting with talented professionals. If you believe you have what it takes to contribute to our team, send your CV and portfolio to our HR department.</p>
-                <a href="mailto:careers@tajdc.com" className="cta-button">Submit Your CV</a>
+            <h2 className="section-title scroll-trigger fade-up">Current <strong>Openings</strong></h2>
+            <div className="openings-list">
+                {careerOpenings.map((job, index) => (
+                    <div className="opening-item scroll-trigger fade-up" key={index} style={{ transitionDelay: `${index * 0.1}s` }}>
+                        <h3>{job.title}</h3>
+                        <p>{job.description}</p>
+                    </div>
+                ))}
             </div>
         </div>
+      </section>
+
+      <section id="application-form" className="content-section" style={{backgroundColor: '#f9f9f9'}}>
+          <div className="container">
+              <h2 className="section-title scroll-trigger fade-up" style={{textAlign: 'center'}}>Apply <strong>Now</strong></h2>
+              <div className="application-form-container scroll-trigger fade-up" style={{transitionDelay: '0.1s'}}>
+                  <form onSubmit={handleSubmit} className={`application-form ${isSubmitted ? 'submitted' : ''}`} aria-hidden={isSubmitted}>
+                      <div className="form-row">
+                          <div className="form-group">
+                              <label htmlFor="name">Full Name</label>
+                              <input type="text" id="name" name="name" required />
+                          </div>
+                          <div className="form-group">
+                              <label htmlFor="email">Email Address</label>
+                              <input type="email" id="email" name="email" required />
+                          </div>
+                      </div>
+                      <div className="form-group">
+                          <label htmlFor="position">Position Applying For</label>
+                           <select id="position" name="position" required>
+                                <option value="">Select a position...</option>
+                                {careerOpenings.map(job => <option key={job.title} value={job.title}>{job.title}</option>)}
+                                <option value="Other">Other</option>
+                           </select>
+                      </div>
+                      <div className="form-group">
+                          <label htmlFor="resume">Upload Resume/CV</label>
+                          <label htmlFor="resume-file" className="custom-file-upload">
+                            <i className="fas fa-upload"></i> {fileName || 'Choose File'}
+                          </label>
+                          <input type="file" id="resume-file" name="resume" accept=".pdf,.doc,.docx" onChange={handleFileChange} required />
+                      </div>
+                       <div className="form-group">
+                          <label htmlFor="cover-letter">Cover Letter</label>
+                          <textarea id="cover-letter" name="cover-letter" rows={5}></textarea>
+                      </div>
+                      <button type="submit" className="submit-btn">Submit Application</button>
+                  </form>
+                  <div className={`success-message ${isSubmitted ? 'visible' : ''}`} aria-hidden={!isSubmitted} aria-live="polite">
+                      <i className="fas fa-check-circle" aria-hidden="true"></i>
+                      <h3 ref={successMessageRef} tabIndex={-1}>Thank You!</h3>
+                      <p>Your application has been submitted. We will review it and get back to you shortly.</p>
+                  </div>
+              </div>
+          </div>
       </section>
     </>
   );
@@ -599,9 +604,29 @@ const App = () => {
     useEffect(() => {
         document.body.style.backgroundColor = '#fff';
         const timer = setTimeout(() => setLoading(false), 200);
+        
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) { 
+            document.querySelectorAll('.scroll-trigger').forEach(el => el.classList.add('visible')); 
+            return; 
+        }
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) { 
+                  entry.target.classList.add('visible'); 
+                  obs.unobserve(entry.target); 
+                }
+            });
+          }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+        const elementsToReveal = document.querySelectorAll('.scroll-trigger');
+        elementsToReveal.forEach((el) => observer.observe(el));
+
         return () => {
             document.body.style.backgroundColor = '';
             clearTimeout(timer);
+            elementsToReveal.forEach((el) => observer.unobserve(el));
         };
     }, []);
 
