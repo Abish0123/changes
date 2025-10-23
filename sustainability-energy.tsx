@@ -9,6 +9,7 @@ const servicesSubLinks = [
   { name: 'Engineering Consultancy', href: 'engineering-consultancy.html', icon: 'fas fa-cogs', description: 'Expert technical advice and solutions for robust project outcomes.', image: 'https://images.unsplash.com/photo-1518692113669-e34fa251a37c?w=800&auto=format&fit=crop&q=60' },
   { name: 'Project Management Consultancy', href: 'project-management.html', icon: 'fas fa-tasks', description: 'Overseeing projects from inception to completion on time and budget.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop&q=60' },
   { name: 'Sustainability & Energy', href: 'sustainability-energy.html', icon: 'fas fa-leaf', description: 'Integrating green principles for environmentally responsible designs.', image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format&fit=crop&q=60' },
+  { name: 'Construction Approval', href: 'construction-approval.html', icon: 'fas fa-check-double', description: 'Navigating regulatory hurdles to secure all necessary construction permits and approvals efficiently.', image: 'https://images.unsplash.com/photo-1563291074-2bf8677ac0e5?w=800&auto=format&fit=crop&q=60' },
 ];
 
 const navLinks = [
@@ -551,7 +552,7 @@ const ServicePage = () => {
   const relatedProjects = [
     { image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&auto=format&fit=crop&q=60", title: "Net-Zero Corporate Campus", category: "Sustainable Design" },
     { image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&auto=format&fit=crop&q=60", title: "Urban Solar Farm", category: "Renewable Energy" },
-    { image: "https://images.unsplash.com/photo-1597044542318-557342371e35?w=800&auto=format&fit=crop&q=60", title: "LEED Platinum Tower Retrofit", category: "Energy Auditing & Retrofitting" },
+    { image: "https://energyassist.ca/wp-content/uploads/2023/11/are-home-energy-audits-worth-it.jpg", title: "LEED Platinum Tower Retrofit", category: "Energy Auditing & Retrofitting" },
   ];
 
   return (
