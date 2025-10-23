@@ -174,7 +174,7 @@ html, body {
   left: 80px;
   width: calc(100% - 80px);
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
   background-color: #000000;
@@ -190,38 +190,18 @@ html, body {
     background-color: rgba(0, 0, 0, 0.9);
 }
 
-.logo .logo-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    gap: 15px;
+.logo-image {
+    height: 60px;
+    width: auto;
 }
-.logo-taj {
-    font-size: 48px;
-    font-weight: 200;
-    line-height: 1;
-}
-.logo-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    transform: translateY(6px);
-}
-.logo-line {
-    width: 80px;
-    height: 1.5px;
-    background-color: var(--accent-color);
-}
-.logo-consultancy {
-    font-size: 16px;
-    letter-spacing: 1.5px;
-    color: var(--accent-color);
-    font-weight: 400;
-}
-.app-header.on-dark .logo-taj { color: var(--text-light); }
-.app-header.on-light .logo-taj { color: var(--text-dark); }
-.app-header:not([class*="on-"]) .logo-taj { color: var(--text-dark); }
 
+.desktop-logo {
+  display: block;
+}
+
+.mobile-logo {
+  display: none;
+}
 
 .main-nav ul {
   list-style: none;
@@ -251,13 +231,6 @@ html, body {
     color: var(--text-dark);
 }
 
-.logo-image {
-    height: 80px;
-    width: auto;
-    position: relative;
-    left: -120px;
-}
-
 .main-nav a::after {
   content: '';
   position: absolute;
@@ -278,8 +251,6 @@ html, body {
     display: flex;
     align-items: center;
     gap: 5px;
-    position: relative;
-    top: 4px;
 }
 
 .dropdown-indicator {
@@ -879,14 +850,18 @@ html, body {
     .service-list { column-count: 1; }
     .project-grid { grid-template-columns: repeat(2, 1fr); }
 
-    /* Fix for mobile header layout */
+    .desktop-logo {
+        display: none;
+    }
+    .mobile-logo {
+        display: block;
+    }
+
     .app-header {
       justify-content: space-between;
     }
     .logo-image {
-      position: static;
-      left: auto;
-      height: 60px; /* Adjust size for tablet */
+      height: 60px;
     }
 }
 @media (max-width: 768px) {
@@ -896,11 +871,10 @@ html, body {
     .copyright-section { flex-direction: column; gap: 20px; text-align: center; }
     .project-grid { grid-template-columns: 1fr; }
 
-    /* Further adjustments for smaller screens */
     .app-header {
         padding: 15px 20px;
     }
-    .logo-image {
+    .logo-image.mobile-logo {
         height: 50px;
     }
 }
