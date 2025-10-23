@@ -1,3 +1,4 @@
+
 :root {
     --dark-bg: #111111;
     --dark-bg-secondary: #1c1c1c;
@@ -192,8 +193,15 @@
   }
 
   .logo-image {
-      height: 80px;
+      height: 60px;
       width: auto;
+  }
+
+  .desktop-logo {
+      display: block;
+  }
+  .mobile-logo {
+      display: none;
   }
 
   .main-nav {
@@ -271,12 +279,12 @@
 
 .dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 10px);
   left: -20px;
   border-radius: 8px;
-  padding: 10px;
+  padding: 8px;
   list-style: none;
-  min-width: 300px;
+  min-width: 280px;
   z-index: 1001;
   opacity: 0;
   visibility: hidden;
@@ -312,7 +320,7 @@
 .dropdown-link-item {
   display: flex;
   align-items: center;
-  padding: 12px 15px;
+  padding: 8px 12px;
   border-radius: 6px;
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -321,14 +329,13 @@
   font-size: 14px;
   letter-spacing: 0;
   white-space: nowrap;
-  margin: -4px;
 }
 .dropdown-link-item::after {
   display: none;
 }
 
 .dropdown-link-icon {
-  margin-right: 15px;
+  margin-right: 10px;
   font-size: 16px;
   width: 20px;
   text-align: center;
@@ -336,7 +343,7 @@
 }
 
 .app-header.on-dark .dropdown-link-item { color: #ccc; }
-.app-header.on-light .dropdown-link-item { color: #555; }
+.app-header.on-light .dropdown-link-item { color: #ccc; }
 
 .app-header.on-dark .dropdown-link-item:hover,
 .app-header.on-dark .dropdown-link-item:focus {
@@ -345,8 +352,8 @@
 }
 .app-header.on-light .dropdown-link-item:hover,
 .app-header.on-light .dropdown-link-item:focus {
-  background-color: #e9e9e9;
-  color: #111;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
 }
 
   
@@ -507,7 +514,7 @@
       font-weight: 300;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: #000;
+      color: var(--text-dark);
   }
   .careers-hero-section h1 strong {
       font-weight: 700;
@@ -535,7 +542,6 @@
   .opening-item h3 {
       font-size: 24px;
       margin-bottom: 10px;
-      color: #000
   }
   .opening-item p {
       line-height: 1.7;
@@ -584,7 +590,7 @@
   .application-form select {
       background-color: #f4f4f4;
       border: 1px solid #ddd;
-      color: #111;
+      color: var(--text-dark);
       padding: 12px;
       border-radius: 4px;
       font-family: inherit;
@@ -860,7 +866,6 @@
   .scroll-trigger.visible {
     opacity: 1;
     transform: none;
-    color: #000;
   }
   /* Responsive Styles */
   @media (max-width: 1200px) {
@@ -875,6 +880,9 @@
       .burger-menu { display: block; }
       .custom-cursor-dot, .custom-cursor-outline { display: none; }
       .app, .app a, .app button, .app [role="button"], .app input { cursor: auto !important; }
+      .desktop-logo { display: none; }
+      .mobile-logo { display: block; }
+      .logo-image { height: 60px; }
   }
   
   @media (max-width: 768px) {
@@ -884,6 +892,7 @@
       .careers-hero-section h1 { font-size: 36px; }
       .application-form .form-row { flex-direction: column; gap: 0; margin-bottom: 0; }
       .copyright-section { flex-direction: column; gap: 20px; text-align: center; }
+      .logo-image.mobile-logo { height: 50px; }
   }
   
   @media (max-width: 480px) {
