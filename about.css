@@ -197,6 +197,13 @@ html, body {
     width: auto;
 }
 
+.desktop-logo {
+    display: block;
+}
+.mobile-logo {
+    display: none;
+}
+
 .app-header.on-dark .main-nav a { color: var(--text-light); }
 .app-header.on-light .main-nav a { color: var(--text-dark); }
 
@@ -464,6 +471,9 @@ html, body {
     .about-content-grid { grid-template-columns: 1fr; }
     .about-sidebar-image { order: -1; margin-bottom: 40px; }
     .values-grid, .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .desktop-logo { display: none; }
+    .mobile-logo { display: block; }
+    .logo-image { height: 60px; }
 }
 @media (max-width: 768px) {
     .content-section { padding: 80px 20px; }
@@ -473,6 +483,7 @@ html, body {
     .cta-section h2 { font-size: 30px; }
     .values-grid, .team-grid { gap: 20px; }
     .section-title { font-size: 28px; }
+    .logo-image.mobile-logo { height: 50px; }
 }
 @media (max-width: 576px) {
     .values-grid, .team-grid { grid-template-columns: 1fr; }
