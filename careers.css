@@ -1,4 +1,3 @@
-
 :root {
     --dark-bg: #111111;
     --dark-bg-secondary: #1c1c1c;
@@ -272,12 +271,12 @@
 
 .dropdown-menu {
   position: absolute;
-  top: calc(100% + 10px);
+  top: 100%;
   left: -20px;
   border-radius: 8px;
-  padding: 8px;
+  padding: 10px;
   list-style: none;
-  min-width: 280px;
+  min-width: 300px;
   z-index: 1001;
   opacity: 0;
   visibility: hidden;
@@ -313,7 +312,7 @@
 .dropdown-link-item {
   display: flex;
   align-items: center;
-  padding: 8px 12px;
+  padding: 12px 15px;
   border-radius: 6px;
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -322,13 +321,14 @@
   font-size: 14px;
   letter-spacing: 0;
   white-space: nowrap;
+  margin: -4px;
 }
 .dropdown-link-item::after {
   display: none;
 }
 
 .dropdown-link-icon {
-  margin-right: 10px;
+  margin-right: 15px;
   font-size: 16px;
   width: 20px;
   text-align: center;
@@ -336,7 +336,7 @@
 }
 
 .app-header.on-dark .dropdown-link-item { color: #ccc; }
-.app-header.on-light .dropdown-link-item { color: #ccc; }
+.app-header.on-light .dropdown-link-item { color: #555; }
 
 .app-header.on-dark .dropdown-link-item:hover,
 .app-header.on-dark .dropdown-link-item:focus {
@@ -345,8 +345,8 @@
 }
 .app-header.on-light .dropdown-link-item:hover,
 .app-header.on-light .dropdown-link-item:focus {
-  background-color: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  background-color: #e9e9e9;
+  color: #111;
 }
 
   
@@ -507,7 +507,7 @@
       font-weight: 300;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: var(--text-dark);
+      color: #000;
   }
   .careers-hero-section h1 strong {
       font-weight: 700;
@@ -535,6 +535,7 @@
   .opening-item h3 {
       font-size: 24px;
       margin-bottom: 10px;
+      color: #000
   }
   .opening-item p {
       line-height: 1.7;
@@ -583,7 +584,7 @@
   .application-form select {
       background-color: #f4f4f4;
       border: 1px solid #ddd;
-      color: var(--text-dark);
+      color: #111;
       padding: 12px;
       border-radius: 4px;
       font-family: inherit;
@@ -859,6 +860,7 @@
   .scroll-trigger.visible {
     opacity: 1;
     transform: none;
+    color: #000;
   }
   /* Responsive Styles */
   @media (max-width: 1200px) {
