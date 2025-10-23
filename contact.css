@@ -118,13 +118,6 @@ html, body {
     width: auto;
 }
 
-.desktop-logo {
-  display: block;
-}
-.mobile-logo {
-  display: none;
-}
-
 .main-nav {
     order: 2;
 }
@@ -276,8 +269,6 @@ html, body {
     .burger-menu { display: block; }
     .custom-cursor-dot, .custom-cursor-outline { display: none; }
     .app, .app a, .app button, .app [role="button"], .app input { cursor: auto !important; }
-    .desktop-logo { display: none; }
-    .mobile-logo { display: block; }
 }
 @media (max-width: 768px) {
     .app-header { padding: 20px; }
