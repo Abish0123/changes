@@ -187,7 +187,7 @@ html, body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 .app-header.on-dark {
-    background-color: transparent;
+    background-color: #000;
 }
 .app-header.scrolled.on-dark {
     background-color: rgba(0, 0, 0, 0.9);
