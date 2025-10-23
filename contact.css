@@ -118,6 +118,13 @@ html, body {
     width: auto;
 }
 
+.desktop-logo {
+  display: block;
+}
+.mobile-logo {
+  display: none;
+}
+
 .main-nav {
     order: 2;
 }
@@ -269,6 +276,15 @@ html, body {
     .burger-menu { display: block; }
     .custom-cursor-dot, .custom-cursor-outline { display: none; }
     .app, .app a, .app button, .app [role="button"], .app input { cursor: auto !important; }
+    .desktop-logo {
+      display: none;
+    }
+    .mobile-logo {
+      display: block;
+    }
+    .logo-image {
+      height: 60px;
+    }
 }
 @media (max-width: 768px) {
     .app-header { padding: 20px; }
@@ -277,4 +293,7 @@ html, body {
     .contact-hero-section h1 { font-size: 36px; }
     .form-row { flex-direction: column; gap: 0; margin-bottom: 0; }
     .copyright-section { flex-direction: column; gap: 20px; text-align: center; }
+    .logo-image {
+      height: 50px;
+    }
 }
